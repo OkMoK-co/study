@@ -24,10 +24,10 @@ export class UsersResolver {
     return this.usersService.findOneById(id);
   }
 
-  @Mutation('createUser')
-  async create(@Args('name') name :String, @Args('email') email:String): Promise<User> {
+	@Mutation('createUser')
+  async create(): Promise<User> {
     console.log("create");
-    return null;
+    return this.usersService.create();
   }
 
 	@Mutation('updateProfileMessage')

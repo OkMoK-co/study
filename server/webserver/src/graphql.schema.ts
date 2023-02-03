@@ -20,7 +20,7 @@ export abstract class IQuery {
 }
 
 export abstract class IMutation {
-    abstract createUser(id?: string): Nullable<User> | Promise<Nullable<User>>;
+    abstract createUser(): Nullable<User> | Promise<Nullable<User>>;
 		abstract updateProfileMessage(name?: string, profileMessage?: string): Nullable<User> | Promise<Nullable<User>>;
 }
 

@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(id:ID!): User
+  createUser: User
 	updateProfileMessage(name: String, profileMessage: String): User
 }
 

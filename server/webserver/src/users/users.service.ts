@@ -7,8 +7,12 @@ export class UsersService {
     { id: 1, name: 'User', profileMessage: '테스트주웅...!!', email: 'user@user.com'},
   ];
 
-  create(user: User): User {
+	create(): User {
+		const user = new User();
     user.id = this.users.length + 1;
+		user.name = 'Guest' + user.id; 										// test
+		user.profileMessage = 'profileMessage' + user.id; // test
+		user.email = '@email'; 														// test
     this.users.push(user);
     return user;
   }
