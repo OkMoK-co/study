@@ -4,7 +4,7 @@ import { User } from '../graphql.schema';
 @Injectable()
 export class UsersService {
   private readonly users: Array<User & { name?: string }> = [
-    { id: 1, name: 'User', email: 'user@user.com'},
+    { id: 1, name: 'User', profileMessage: '테스트주웅...!!', email: 'user@user.com'},
   ];
 
   create(user: User): User {
@@ -20,4 +20,10 @@ export class UsersService {
   findOneById(id: number): User {
     return this.users.find(user => user.id === id);
   }
+
+	updateProfileMessage(name: string, profileMessage: string): User {
+		const user = this.users.find(user => user.name === name);
+		user.profileMessage = profileMessage;
+		return user;
+	}
 }

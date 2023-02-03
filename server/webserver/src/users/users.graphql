@@ -5,12 +5,12 @@ type Query {
 
 type Mutation {
   createUser(id:ID!): User
+	updateProfileMessage(name: String, profileMessage: String): User
 }
 
 type User {
   id: Int
   name: String
+	profileMessage: String
   email: String
 }
-
-

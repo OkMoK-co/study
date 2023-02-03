@@ -21,11 +21,13 @@ export abstract class IQuery {
 
 export abstract class IMutation {
     abstract createUser(id?: string): Nullable<User> | Promise<Nullable<User>>;
+		abstract updateProfileMessage(name?: string, profileMessage?: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export class User {
     id?: Nullable<number>;
     name?: Nullable<string>;
+		profileMessage?: Nullable<string>;
     email?: Nullable<string>;
 }
 

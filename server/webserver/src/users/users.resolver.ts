@@ -29,4 +29,10 @@ export class UsersResolver {
     console.log("create");
     return null;
   }
+
+	@Mutation('updateProfileMessage')
+	async update(@Args('name') name :string, @Args('profileMessage') profileMessage :string): Promise<User> {
+	console.log("update");
+	return this.usersService.updateProfileMessage(name, profileMessage);
+}
 }
