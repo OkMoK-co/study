@@ -1,25 +1,34 @@
-import Link from 'next/link';
-import { Inter } from '@next/font/google';
+"use client";
+import Link from "next/link";
+import { Inter } from "@next/font/google";
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 
-const inter = Inter({ subsets: ['latin'] });
+// 새로운 apollo client 만들기
+const client = new ApolloClient({
+  uri: "http://localhost:3000/api/graphql",
+  cache: new InMemoryCache(),
+});
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  (async () => {
-    const response = await fetch('http://localhost:3000/api/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'applocation/json',
-      },
-      body: JSON.stringify({ query: '{ users { name } }' }),
+  const getUser = async () => {
+    // apollo에 연결된 graphql쿼리문 사용하고, 데이터 불러오기
+    const { data } = await client.query({
+      query: gql`
+        query Users {
+          users {
+            name
+          }
+        }
+      `,
     });
-    // const json = await response.json();// json 형태 변경 처리 필요
-    console.log('우린 할 수 있다', response);
-  })();
-
+    console.log(data);
+  };
   return (
     <>
-      <div>메인입니다.</div>
-      <Link href='/profile'>프로필로 가기</Link>
+      <div onClick={getUser}>메인입니다.</div>
+      <Link href="/profile">프로필로 가기</Link>
     </>
   );
 }
