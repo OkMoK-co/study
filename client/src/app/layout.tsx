@@ -1,9 +1,9 @@
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -12,7 +12,12 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body><div>root layout 입니다.</div>{children}</body>
+      <body>
+        {/* <ApolloProvider client={client}> */}
+        <div>root layout 입니다.</div>
+        {children}
+        {/* </ApolloProvider> */}
+      </body>
     </html>
-  )
+  );
 }
