@@ -6,7 +6,14 @@ export const config = {
     bodyParser: false,
   },
 };
-const userTable = [{ name: "Nextjs" }, { name: "jiyo" }, { name: "hello" }];
+interface usertype {
+  name: String;
+}
+const userTable: usertype[] = [
+  { name: "Nextjs" },
+  { name: "jiyo" },
+  { name: "hello" },
+];
 const schema = createSchema({
   typeDefs: `
     type Query {
@@ -15,6 +22,9 @@ const schema = createSchema({
     }
     type User {
       name: String
+    }
+    type Mutation {
+      addUser(name:String): [User]
     }
   `,
   resolvers: {
@@ -25,8 +35,16 @@ const schema = createSchema({
       users: () => {
         return userTable;
       },
-      getUserByName: (name) => {
-        return userTable.filter((e) => e.name == name)[0];
+      getUserByName: (name: String) => {
+        //왜 안될까?
+        console.log(name);
+        return userTable.filter((e) => e.name === name)[0];
+      },
+    },
+    Mutation: {
+      addUser: (name: String) => {
+        userTable.push({ name: name });
+        return userTable;
       },
     },
   },
