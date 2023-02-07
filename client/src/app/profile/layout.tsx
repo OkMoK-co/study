@@ -1,7 +1,7 @@
 export default function ProfileLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     // <html lang="en">
@@ -12,6 +12,6 @@ export default function ProfileLayout({
     //   <head />
     //   <body><div>layout</div>{children}</body>
     // </html>
-		<section>layout입니다.{children}</section>
-  )
+    <section>layout입니다.{children}</section>
+  );
 }
