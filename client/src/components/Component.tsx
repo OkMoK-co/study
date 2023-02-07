@@ -7,9 +7,23 @@ const getUsersQuery = gql`
     }
   }
 `;
+const getUserByName = gql`
+  query myQuery($name: String) {
+    getUserByName(name: $name) {
+      name
+    }
+  }
+`;
 
 export default function Component() {
+  const name = "jiyo";
   const { loading, error, data } = useQuery(getUsersQuery);
-  console.log(data);
-  return <div>hi {data?.users[0].name}</div>;
+  const userByName = useQuery(getUserByName, { variables: { name } });
+  console.log(userByName);
+  return (
+    <div>
+      <div>get UserList {data?.users[1].name}</div>
+      <div>getUserByName {userByName.data?.name}</div>
+    </div>
+  );
 }
