@@ -38,7 +38,7 @@ export default function Component() {
   //   },
   // });
   const { loading, error, data } = useQuery(USERS_NAME_FILTER, {
-    variables: { filter: { name: name } },
+    variables: { filter: { name: undefined } },
     onCompleted: (data) => {
       console.log(data);
     },

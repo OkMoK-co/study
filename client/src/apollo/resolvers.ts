@@ -27,10 +27,11 @@ const resolvers = {
     users: () => users,
     usersFilter: (_: any, args: any) => {
       console.log(args.filter.name);
+      if (args.filter.name === undefined) return users;
       return users.filter((e) => e.name === args.filter.name);
     },
     getUserByName: (_: any, name: argType) => {
-      //findUser(name.name); 추가
+      //findUser(name.name);
       return users.filter((e) => e.name === name.name)[0];
     },
   },
@@ -39,7 +40,7 @@ const resolvers = {
     addUser: (_: any, name: argType) => {
       console.log("addUserMutation: ", name.name);
       users.push({ name: name.name, nickName: "jabae", age: 0 });
-      addUser({ name: name.name, nickName: "test" });
+      // addUser({ name: name.name, nickName: "test" });
       return users;
     },
     modifyNickname: (_: any, { name, nickName }: argType) => {
@@ -49,7 +50,7 @@ const resolvers = {
           e.nickName = nickName;
         }
       });
-      modifyNickname({ name: "jiyokim", nickName: "modify" });
+      // modifyNickname({ name: "jiyokim", nickName: "modify" });
       return { name: name, nickName: nickName };
     },
   },
