@@ -1,7 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import { useState } from "react";
+import CreateButton from "./CreateButton";
+import UpdateButton from "./UpdateButton";
 
-const getUsersQuery = gql`
+const USERS_QUERY = gql`
   query Users {
     users {
       name
@@ -9,6 +11,16 @@ const getUsersQuery = gql`
     }
   }
 `;
+
+const USERS_NAME_FILTER = gql`
+  query Users($filter: UserFilter) {
+    usersFilter(filter: $filter) {
+      name
+      age
+    }
+  }
+`;
+
 const getUserByName = gql`
   query myQuery($name: String) {
     getUserByName(name: $name) {
@@ -16,69 +28,33 @@ const getUserByName = gql`
     }
   }
 `;
-const addUserQuery = gql`
-  mutation myMutation($name: String) {
-    addUser(name: $name) {
-      name
-      nickName
-    }
-  }
-`;
-const modifyUserNameQuery = gql`
-  mutation myMutation($name: String, $nickName: String) {
-    modifyNickname(name: $name, nickName: $nickName) {
-      name
-      nickName
-    }
-  }
-`;
 
 export default function Component() {
   const name: String = "jiyo";
   const newUserName = "jabae";
-  // const { loading, error, data } = useQuery(getUsersQuery);
+  // const { loading, error, data } = useQuery(USERS_QUERY, {
+  //   onCompleted: (data) => {
+  //     console.log(data);
+  //   },
+  // });
+  const { loading, error, data } = useQuery(USERS_NAME_FILTER, {
+    variables: { filter: { name: name } },
+    onCompleted: (data) => {
+      console.log(data);
+    },
+  });
   // const { loading, error, data } = useQuery(getUserByName, {
   //   variables: { name },
   // });
-  // const [addUser, { loading, error, data }] = useMutation(addUserQuery, {
-  //   errorPolicy: "all",
-  //   onCompleted: (data) => {
-  //     console.log("in useMutation", data);
-  //   },
-  // });
-  const [modifyNickname, { loading, error, data }] = useMutation(
-    modifyUserNameQuery,
-    {
-      onCompleted: (data) => {
-        console.log("complete ", data);
-      },
-    }
-  );
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
+  const userList = data?.users?.map((e: any, i: number) => (
+    <div key={i}>{`Name: ${e.name} nickName : ${e.nickName}`}</div>
+  ));
   return (
     <div>
-      {/* <div>get UserList {data?.users[1].name}</div> */}
       {/* <div>getUserByName {data?.getUserByName.name}</div> */}
-      {/* <div
-        onClick={() => {
-          addUser({ variables: { name: newUserName } });
-        }}
-      >
-        addUser
-      </div> */}
-      <div
-        onClick={() => {
-          modifyNickname({
-            variables: { name: newUserName, nickName: "hoohoo" },
-          });
-        }}
-      >
-        modify success?
-      </div>
+      <UpdateButton />
+      <CreateButton />
+      <div>{userList}</div>
     </div>
   );
 }

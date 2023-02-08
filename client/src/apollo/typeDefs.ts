@@ -4,9 +4,15 @@ const typeDefs = gql`
   type User {
     name: String!
     nickName: String
+    age: Int
+  }
+  input UserFilter {
+    name: String
+    age: Int
   }
   type Query {
     users: [User]
+    usersFilter(filter: UserFilter): [User]
     getUserByName(name: String): User
   }
   type Mutation {
