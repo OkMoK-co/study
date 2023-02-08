@@ -16,7 +16,7 @@ const USERS_NAME_FILTER = gql`
   query Users($filter: UserFilter) {
     usersFilter(filter: $filter) {
       name
-      age
+      nickName
     }
   }
 `;
@@ -38,15 +38,22 @@ export default function Component() {
   //   },
   // });
   const { loading, error, data } = useQuery(USERS_NAME_FILTER, {
-    variables: { filter: { name: undefined } },
+    variables: {
+      filter: {
+        /**비어있으면 전체리스트를 반환 */
+      },
+    },
     onCompleted: (data) => {
       console.log(data);
+    },
+    onError: () => {
+      console.log("error");
     },
   });
   // const { loading, error, data } = useQuery(getUserByName, {
   //   variables: { name },
   // });
-  const userList = data?.users?.map((e: any, i: number) => (
+  const userList = data?.usersFilter?.map((e: any, i: number) => (
     <div key={i}>{`Name: ${e.name} nickName : ${e.nickName}`}</div>
   ));
   return (

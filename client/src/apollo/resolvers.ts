@@ -27,7 +27,7 @@ const resolvers = {
     users: () => users,
     usersFilter: (_: any, args: any) => {
       console.log(args.filter.name);
-      if (args.filter.name === undefined) return users;
+      if (!args.filter.name && !args.filter.age) return users;
       return users.filter((e) => e.name === args.filter.name);
     },
     getUserByName: (_: any, name: argType) => {
