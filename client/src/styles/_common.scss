@@ -1,0 +1,15 @@
+// 공통되는 스타일을 정의합니다.
+// 폰트, 주요 색상은 $변수로 정의합니다.
+// 스타일은 @mixin 으로 정의하고, 사용은 @include 로 사용합니다.
+
+$main-font: 'Nanum Gothic', sans-serif;
+
+$lime: #00ff00;
+$fushia: #ff00ff;
+
+@mixin wrapper($background-color) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-color;
+}
