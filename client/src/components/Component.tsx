@@ -1,5 +1,5 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 const getUsersQuery = gql`
   query Users {
@@ -34,8 +34,8 @@ const modifyUserNameQuery = gql`
 `;
 
 export default function Component() {
-  const name: String = "jiyo";
-  const newUserName = "jabae";
+  const name: String = 'jiyo';
+  const newUserName = 'jiyokim';
   // const { loading, error, data } = useQuery(getUsersQuery);
   // const { loading, error, data } = useQuery(getUserByName, {
   //   variables: { name },
@@ -50,7 +50,7 @@ export default function Component() {
     modifyUserNameQuery,
     {
       onCompleted: (data) => {
-        console.log("complete ", data);
+        console.log('complete ', data);
       },
     }
   );
@@ -73,7 +73,7 @@ export default function Component() {
       <div
         onClick={() => {
           modifyNickname({
-            variables: { name: newUserName, nickName: "hoohoo" },
+            variables: { name: newUserName, nickName: 'hoohoo' },
           });
         }}
       >
