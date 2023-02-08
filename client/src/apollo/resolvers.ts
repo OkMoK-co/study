@@ -1,3 +1,5 @@
+import { addUser, findUser, modifyNickname } from "config/db";
+
 interface argType {
   [key: string]: any; //any...ㅠㅠ
 }
@@ -28,6 +30,7 @@ const resolvers = {
       return users.filter((e) => e.name === args.filter.name);
     },
     getUserByName: (_: any, name: argType) => {
+      //findUser(name.name); 추가
       return users.filter((e) => e.name === name.name)[0];
     },
   },
@@ -36,6 +39,7 @@ const resolvers = {
     addUser: (_: any, name: argType) => {
       console.log("addUserMutation: ", name.name);
       users.push({ name: name.name, nickName: "jabae", age: 0 });
+      addUser({ name: name.name, nickName: "test" });
       return users;
     },
     modifyNickname: (_: any, { name, nickName }: argType) => {
@@ -45,6 +49,7 @@ const resolvers = {
           e.nickName = nickName;
         }
       });
+      modifyNickname({ name: "jiyokim", nickName: "modify" });
       return { name: name, nickName: nickName };
     },
   },
