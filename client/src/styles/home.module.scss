@@ -1,0 +1,15 @@
+// @import './_common.scss';
+
+// .main {
+//   @include wrapper($lime);
+//   font-style: $main-font;
+// }
+// 기존에는 위와 같이 import를 사용했지만, 이제는 아래와 같이 사용합니다.
+// import로 여러 파일을 불러올 경우에도 클래스네임이 겹쳐질 수 있어 이렇게 사용할 것을 공식적으로 권장합니다.
+
+@use './_common.scss' as g;
+
+.main {
+  @include g.wrapper(g.$lime);
+  font-style: g.$main-font;
+}

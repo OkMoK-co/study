@@ -1,6 +1,6 @@
 'use client';
 
-import './globals.css';
+import '@/styles/_global.css';
 import { client } from '@/apollo-client';
 import { ApolloProvider } from '@apollo/client';
 
